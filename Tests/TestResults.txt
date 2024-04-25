@@ -1,8 +1,0 @@
-﻿[Passed Tests]
-- TestAdd
-- TestSubtract
-- TestToString
-
-[Passed] : 3 
-[Failed] : 0 
-[Skipped] : 0 

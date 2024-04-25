@@ -2,9 +2,9 @@
     "name": "Tests",
     "rootNamespace": "",
     "references": [
+        "Scripts",
         "UnityEngine.TestRunner",
-        "UnityEditor.TestRunner",
-        "Scripts"
+        "UnityEditor.TestRunner"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

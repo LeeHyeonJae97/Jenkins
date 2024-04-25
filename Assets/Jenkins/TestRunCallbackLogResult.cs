@@ -7,8 +7,8 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.TestRunner;
 
-[assembly: TestRunCallback(typeof(TestCallback))]
-public class TestCallback : ITestRunCallback
+[assembly: TestRunCallback(typeof(TestRunCallbackLogResult))]
+public class TestRunCallbackLogResult : ITestRunCallback
 {
     public void RunStarted(ITest testsToRun)
     {
@@ -83,15 +83,25 @@ public class TestCallback : ITestRunCallback
                     sb.AppendLine($"- {value.Name}");
                 }
             }
-
             sb.AppendLine();
 
             foreach (var result in results)
             {
-                sb.AppendLine($"[{result.Key}] : {result.Value.Count} ");
+                sb.Append($"[{result.Key}]: {result.Value.Count} ");
+            }
+            sb.AppendLine();
+
+            var resultPath = EditorPrefs.GetString(Args.TestResultPath);
+
+            // remove used key
+            EditorPrefs.DeleteKey(Args.TestResultPath);
+
+            if (!Directory.Exists(resultPath))
+            {
+                Directory.CreateDirectory(resultPath);
             }
 
-            File.WriteAllText("Tests/TestResults.txt", sb.ToString(), Encoding.UTF8);
+            File.WriteAllText(Path.Combine(resultPath, "TestResult.txt"), sb.ToString(), Encoding.UTF8);
         }
     }
 }
