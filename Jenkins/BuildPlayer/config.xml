@@ -1,0 +1,57 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>scriptingDefineSymbol</name>
+          <description>scripting define symbol. use &apos;;&apos; as delimeter</description>
+          <defaultValue>JENKINS</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>bundleVersion</name>
+          <description>bundle version. will be used as file name as well.</description>
+          <defaultValue>1.0.0</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>bundleVersionCode</name>
+          <description>bundle version code only for Android (must be greater than 0)</description>
+          <defaultValue>1</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>dev</name>
+          <description>enable development build</description>
+          <defaultValue>false</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>buildPath</name>
+          <description>path that build file will be created</description>
+          <defaultValue>.</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <org.jenkinsci.plugins.unity3d.Unity3dBuilder plugin="unity3d-plugin@1.3">
+      <unity3dName>2021.3.9 f1 (LTS)</unity3dName>
+      <argLine>-batchmode -projectPath F:\_HyeonJae\Jenkins -executeMethod Jenkins.BuildPlayer -scriptingDefineSymbol ${scriptingDefineSymbol} -bundleVersion ${bundleVersion} -bundleVersionCode ${bundleVersionCode} -dev ${dev} -buildPath ${JENKINS_HOME}\workspace\BuildPlayer\${buildPath}</argLine>
+      <unstableReturnCodes></unstableReturnCodes>
+    </org.jenkinsci.plugins.unity3d.Unity3dBuilder>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>

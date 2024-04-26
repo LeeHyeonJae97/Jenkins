@@ -1,0 +1,36 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@1400.v7fd111b_ec82f">
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <org.jenkinsci.plugins.workflow.job.properties.DisableConcurrentBuildsJobProperty>
+      <abortPrevious>true</abortPrevious>
+    </org.jenkinsci.plugins.workflow.job.properties.DisableConcurrentBuildsJobProperty>
+  </properties>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@3894.vd0f0248b_a_fc4">
+    <script>node {
+    stage(&apos;Test&apos;) {
+        def build = build propagate: false, job: &apos;Test&apos;;
+        def result = build.result;
+        
+        if (result != &apos;SUCCESS&apos;) {
+            def testResult = readFile file: &apos;TestResults.txt&apos;, encoding: &apos;UTF8&apos;;
+            error &apos;\n&apos; + testResult;
+        }
+    }
+    
+    stage(&apos;Build Player&apos;) {
+        def build = build propagate: false, job: &apos;BuildPlayer&apos;;
+        def result = build.result;
+        
+        if(result != &apos;SUCCESS&apos;) {
+            error &apos;fail to build player&apos;;
+        }
+    }
+}</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
+</flow-definition>
