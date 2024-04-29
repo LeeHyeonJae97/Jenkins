@@ -58,7 +58,7 @@ public class Jenkins
                 scenes = GetScenesFromBuildSettings(),
                 target = EditorUserBuildSettings.activeBuildTarget,
                 targetGroup = EditorUserBuildSettings.selectedBuildTargetGroup,
-                locationPathName = Path.Combine(buildPath, GetFileNameWithExtension(PlayerSettings.bundleVersion)),
+                locationPathName = Path.Combine(buildPath, PlayerSettings.bundleVersion, GetFileNameWithExtension(PlayerSettings.bundleVersion)),
                 options = args.GetBoolArg(Args.Dev) ? BuildOptions.Development : BuildOptions.None,
             };
 
