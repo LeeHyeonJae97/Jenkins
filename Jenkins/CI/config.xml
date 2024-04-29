@@ -14,7 +14,7 @@
         def build = build propagate: false, job: &apos;Test&apos;;
         def result = build.result;
         
-        if (result != &apos;SUCCESS&apos;) {
+        if (result == &apos;SUCCESS&apos;) {
             def testResult = readFile file: &apos;TestResults.txt&apos;, encoding: &apos;UTF8&apos;;
             error &apos;\n&apos; + testResult;
         }
